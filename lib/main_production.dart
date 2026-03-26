@@ -19,12 +19,24 @@ import 'package:times_up_flutter/app/features/parent_side/language/language_noti
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   late final packageInfo;
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  ).whenComplete(() async {
-    packageInfo = await PackageInfo.fromPlatform();
-    await _notificationServiceListener();
-  });
+
+  // CI builds (CI_BUILD=true) skip Firebase initialization
+  // Download real google-services.json from Firebase Console to enable Firebase
+  const isCI = bool.fromEnvironment('CI_BUILD', defaultValue: false);
+
+  if (!isCI) {
+    try {
+      final options = DefaultFirebaseOptions.currentPlatform;
+      if (options != null) {
+        await Firebase.initializeApp(options: options);
+      }
+    } catch (_) {
+      // Firebase initialization failed, continue without it
+    }
+  }
+
+  packageInfo = await PackageInfo.fromPlatform();
+  await _notificationServiceListener();
 
   await bootstrap(
     () => MultiProvider(
