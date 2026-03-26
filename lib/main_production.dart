@@ -14,6 +14,7 @@ import 'package:times_up_flutter/services/geo_locator_service.dart';
 import 'package:times_up_flutter/services/internet_connectivity_service.dart';
 import 'package:times_up_flutter/services/notification_service.dart';
 import 'package:times_up_flutter/theme/theme_notifier.dart';
+import 'package:times_up_flutter/app/features/parent_side/language/language_notififier.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
