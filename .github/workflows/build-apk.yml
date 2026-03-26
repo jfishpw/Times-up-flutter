@@ -69,7 +69,16 @@ jobs:
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Build Release APK
-        run: flutter build apk --release -t lib/main_production.dart --flavor production --dart-define=CI_BUILD=true
+        run: |
+          # Generate a temporary keystore for CI release builds
+          mkdir -p ~/.android
+          keytool -genkey -v -keystore ~/.android/debug.keystore \
+            -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass android -keypass android \
+            -dname "CN=Android Debug,O=Android,C=US" 2>/dev/null || true
+          # Use debug signing for release build in CI
+          sed -i 's/signingConfig signingConfigs.release/signingConfig signingConfigs.debug/' android/app/build.gradle
+          flutter build apk --release -t lib/main_production.dart --flavor production --dart-define=CI_BUILD=true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
