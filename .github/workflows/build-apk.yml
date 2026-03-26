@@ -19,35 +19,38 @@ jobs:
         with:
           flutter-version: 3.10.0
 
-      - name: Setup Firebase (create placeholder google-services.json if missing)
+      - name: Create placeholder google-services.json
         run: |
-          if [ ! -f android/app/google-services.json ]; then
-            printf '%s\n' \
-              "{" \
-              "  \"project_info\": {" \
-              "    \"project_number\": \"000000000000\"," \
-              "    \"project_id\": \"times-up-placeholder\"," \
-              "    \"storage_bucket\": \"times-up-placeholder.appspot.com\"" \
-              "  }," \
-              "  \"client\": [" \
-              "    {" \
-              "      \"client_info\": {" \
-              "        \"mobilesdk_app_id\": \"1:000000000000:android:0000000000000000\"," \
-              "        \"android_client_info\": {" \
-              "          \"package_name\": \"com.jordyhers.times_up_flutter\"" \
-              "        }" \
-              "      }," \
-              "      \"api_key\": [" \
-              "        { \"current_key\": \"AIzaSyPlaceholderKeyForCIBuild\" }" \
-              "      ]," \
-              "      \"services\": {" \
-              "        \"appinvite_service\": { \"other_platform_oauth_client\": [] }" \
-              "      }" \
-              "    }" \
-              "  ]," \
-              "  \"configuration_version\": \"1\"" \
-              "}" > android/app/google-services.json
-          fi
+          cat > android/app/google-services.json << 'ENDOFJSON'
+          {
+            "project_info": {
+              "project_number": "000000000000",
+              "project_id": "times-up-placeholder",
+              "storage_bucket": "times-up-placeholder.appspot.com"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:00000000000000000000",
+                  "android_client_info": {
+                    "package_name": "com.jordyhers.times_up_flutter"
+                  }
+                },
+                "api_key": [
+                  {
+                    "current_key": "AIzaSyPlaceholderKeyForCIBuildsOnly"
+                  }
+                ],
+                "services": {
+                  "appinvite_service": {
+                    "other_platform_oauth_client": []
+                  }
+                }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          ENDOFJSON
 
       - name: Install Dependencies
         run: flutter pub get
