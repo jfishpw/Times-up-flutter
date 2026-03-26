@@ -17,6 +17,7 @@ class LanguageNotifier extends ChangeNotifier {
     '🇪🇸 Español',
     '🇹🇷 Turkish',
     '🇩🇪 Deutsch',
+    '🇨🇳 中文',
   ];
 
   Future<void> initLocalization() async {
@@ -55,6 +56,9 @@ class LanguageNotifier extends ChangeNotifier {
       case 'tr':
         _selectedLanguage = '🇹🇷 Turkish󠁢';
         break;
+      case 'zh':
+        _selectedLanguage = '🇨🇳 中文';
+        break;
     }
   }
 
@@ -70,6 +74,8 @@ class LanguageNotifier extends ChangeNotifier {
         return const Locale('tr');
       case '🇩🇪 Deutsch󠁢':
         return const Locale('de');
+      case '🇨🇳 中文':
+        return const Locale('zh');
       default:
         return const Locale('en');
     }

@@ -1,0 +1,13 @@
+{
+    "@@locale": "zh",
+    "welcome": "欢迎",
+    "hello": "你好 👋",
+    "changeTheSettingsHere": "在此更改设置",
+    "addNewChildHere": "在此添加新子女",
+    "operationFailed": "操作失败",
+    "enterThisCode": "在孩子的设备上输入此代码",
+    "longPressToCopyOrDoubleTapToShare": "长按复制或双击分享",
+    "enterThisCodeOnChildDevice": "在孩子的设备上输入此代码：",
+    "sendNotificationToYourChildDevice": "向您孩子的设备发送通知",
+    "copyText": "代码已复制！"
+}
