@@ -100,28 +100,17 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
         debug {
             signingConfig signingConfigs.debug
         }
     }
-
-    lint {
-        abortOnError false
-        checkReleaseBuilds false
-    }
 }
 
 flutter {
     source '../..'
-}
-
-tasks.whenTaskAdded { task ->
-    if (task.name.startsWith("lintVital")) {
-        task.enabled = false
-    }
 }
 
 dependencies {
