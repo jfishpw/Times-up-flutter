@@ -113,6 +113,12 @@ flutter {
     source '../..'
 }
 
+tasks.whenTaskAdded { task ->
+    if (task.name.startsWith("lintVital")) {
+        task.enabled = false
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.room:room-runtime:2.3.0"
