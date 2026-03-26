@@ -19,6 +19,16 @@ jobs:
         with:
           flutter-version: 3.10.0
 
+      - name: Create local.properties with required keys
+        run: |
+          cat > android/local.properties << 'ENDPROP'
+          sdk.dir=/opt/android-sdk
+          flutter.sdk=/opt/hostedtoolcache/flutter/stable-3.10.0-x64/flutter
+          flutter.versionCode=1
+          flutter.versionName=1.0.0
+          GOOGLE_MAPS_API_KEY=AIzaSyPlaceholderMapsKeyForCIBuild
+          ENDPROP
+
       - name: Create placeholder google-services.json
         run: |
           cat > android/app/google-services.json << 'ENDOFJSON'
